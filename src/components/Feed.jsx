@@ -9,6 +9,11 @@ import FlipMove from "react-flip-move"
 
 const Feed = () => {
     const [posts, setPosts]= useState([])
+    const [lengthOfPosts, setLengthOfPosts] = useState(0)
+
+    useEffect(() => {
+        setLengthOfPosts(posts.length)
+    }, [posts]);
 
     async function getAllPosts() {
         const data = await getDocs(collection(db, "posts"))
@@ -34,10 +39,13 @@ const Feed = () => {
                 <h2>Twitter Clone</h2>
             </div>
 
-            <Tweetbox />
+            <Tweetbox lengthOfPosts={lengthOfPosts}/>
 
             <FlipMove>
-            {posts.map((post) => (
+            {posts.sort((a,b) => {
+                return b.order - a.order
+            })
+            .map((post) => (
                 <Post
                 key={post.key}
                 displayName={post.displayName}
@@ -45,7 +53,8 @@ const Feed = () => {
                 verified={post.verified}
                 text={post.text}
                 avatar={post.avatar}
-                image={post.image}/>
+                image={post.image}
+                time={post.time}/>
             ))}
             </FlipMove>
         </div>

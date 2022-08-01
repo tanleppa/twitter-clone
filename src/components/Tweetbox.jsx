@@ -4,11 +4,16 @@ import { Avatar, Button } from '@mui/material'
 import {collection, addDoc } from 'firebase/firestore'
 import { db } from './firebase.js'
 
-const Tweetbox = () => {
+const Tweetbox = ({lengthOfPosts}) => {
     const [tweetMessage, setTweetMessage] = useState("")
     const [tweetImg, setTweetImg] = useState("")
 
     async function sendTweet(e) {
+        let current = new Date()
+        const date = current.toLocaleDateString()
+        const time = current.toLocaleTimeString().split(".").slice(0,2).join(":").padStart(5, "0")
+        const dateAndTime = date + " " + time
+
         e.preventDefault()
         const post = {
             displayName:"User",
@@ -17,6 +22,8 @@ const Tweetbox = () => {
             text:tweetMessage,
             avatar:"",
             image:tweetImg,
+            time:dateAndTime,
+            order:lengthOfPosts + 1
         }
         await addDoc(collection(db, "posts"), post).then(res => {
             setTweetImg("")

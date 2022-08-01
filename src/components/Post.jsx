@@ -14,7 +14,8 @@ const Post = forwardRef(({
     verified,
     text,
     image,
-    avatar}, ref) => {
+    avatar,
+    time}, ref) => {
 
     const [liked, setLiked] = useState(false)
 
@@ -26,7 +27,7 @@ const Post = forwardRef(({
             <div className="post__body">
                 <div className="post__header">
                     <div className="post__header--text">
-                        <h3>{displayName} <span className='post__header--special'>{verified && <VerifiedIcon className='post__badge'/>} @{username}</span></h3>
+                        <h3>{displayName} <span className='post__header--special'>{verified && <VerifiedIcon className='post__badge'/>} @{username} • {time}</span></h3>
                     </div>
                     <div className="post__header--desc">
                         <p>{text}</p>
