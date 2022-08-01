@@ -1,0 +1,44 @@
+.feed {
+    width: 100%;
+    border-right: 1px solid var(--tweeter-background);
+    min-width: fit-content;
+    overflow-y: scroll;
+}
+
+.feed::-webkit-scrollbar {
+    display: none;
+}
+
+.feed {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.feed__header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border: 1px solid var(--tweeter-background);
+    border-left: none;
+    padding: 15px 20px;
+}
+
+.feed__header > h2 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+@media (max-width: 1080px) {
+    .feed {
+        
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .feed {
+        flex: 0.9;
+        min-width: auto;
+    }
+}
